@@ -3,6 +3,7 @@
 
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var S3Adapter = require('parse-server').S3Adapter;
 var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -17,6 +18,12 @@ var api = new ParseServer({
   appId: process.env.APP_ID || '0JaZQrVZ27THPwguhl3M0kiPgCpoiKLRgDYk4H2j',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'https://ramen-beast.herokuapp.com/parse',  // Don't forget to change to https if needed
+  filesAdapter: new S3Adapter(
+  	"AKIAIQVBGTZBES6KF32Q",
+	"lKin+njcwb2sctqSlWJRplAPmq3PykiA+Ek2JEuJ",
+	  "ramen-beast-assets",
+	  {directAccess: true}
+	  ),
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
