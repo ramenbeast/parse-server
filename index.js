@@ -17,6 +17,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || '0JaZQrVZ27THPwguhl3M0kiPgCpoiKLRgDYk4H2j',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+  javascriptKey: process.env.JAVSCRIPT_KEY || '',
   serverURL: process.env.SERVER_URL || 'https://ramen-beast.herokuapp.com/parse',  // Don't forget to change to https if needed
   filesAdapter: new S3Adapter(
   	process.env.S3_ACCESS_KEY,
