@@ -19,8 +19,8 @@ var api = new ParseServer({
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'https://ramen-beast.herokuapp.com/parse',  // Don't forget to change to https if needed
   filesAdapter: new S3Adapter(
-  	"AKIAIQVBGTZBES6KF32Q",
-	"lKin+njcwb2sctqSlWJRplAPmq3PykiA+Ek2JEuJ",
+  	"AKIAIXXH2L3RCGUQ3M5Q",
+	"epeGQbEBrOxdfuBKBybGOFOwUc/me1hVlqVER8jk",
 	  "ramen-beast-assets",
 	  {directAccess: true}
 	  ),
