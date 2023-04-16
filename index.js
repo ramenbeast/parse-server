@@ -3,10 +3,18 @@
 
 import express from 'express';
 import { ParseServer } from 'parse-server';
-var S3Adapter = require('@parse/s3-files-adapter');
+import S3Adapter from '@parse/s3-files-adapter';
 import path from 'path';
 const __dirname = path.resolve();
 import http from 'http';
+
+
+var s3Options = {
+  "accessKey": process.env.S3_ACCESS_KEY,
+  "secretKey": process.env.S3_SECRET_KEY,
+  "bucket": process.env.S3_BUCKET_NAME,
+  "directAccess": true,
+}
 
 export const config = {
   databaseURI:
@@ -15,12 +23,7 @@ export const config = {
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse', // Don't forget to change to https if needed
-  filesAdapter: new S3Adapter(
-    process.env.S3_ACCESS_KEY,
-    process.env.S3_SECRET_KEY,
-    process.env.S3_BUCKET_NAME,
-    { directAccess: true }
-  ),
+  filesAdapter: new S3Adapter(s3Options),
   liveQuery: {
     classNames: ['Posts', 'Comments'], // List of classes to support for query subscriptions
   },
