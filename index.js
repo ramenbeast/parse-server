@@ -3,7 +3,7 @@
 
 import express from 'express';
 import { ParseServer } from 'parse-server';
-var S3Adapter = require('parse-server').S3Adapter;
+var S3Adapter = require('@parse/s3-files-adapter');
 import path from 'path';
 const __dirname = path.resolve();
 import http from 'http';
