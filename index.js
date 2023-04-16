@@ -3,6 +3,7 @@
 
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var S3Adapter = require('parse-server').S3Adapter;
 var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -12,11 +13,18 @@ if (!databaseUri) {
 }
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: databaseUri || 'mongodb://heroku_312nt0sc:u0ise00hoq29482e31b30fh4gq@ds151618-a0.mlab.com:51618,ds151618-a1.mlab.com:51618/heroku_312nt0sc?replicaSet=rs-ds151618',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
+  appId: process.env.APP_ID || '0JaZQrVZ27THPwguhl3M0kiPgCpoiKLRgDYk4H2j',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  // javascriptKey: process.env.JAVASCRIPT_KEY || '',
+  serverURL: process.env.SERVER_URL || 'https://ramen-beast.herokuapp.com/parse',  // Don't forget to change to https if needed
+  filesAdapter: new S3Adapter(
+  	process.env.S3_ACCESS_KEY,
+	  process.env.S3_SECRET_KEY,
+	  process.env.S3_BUCKET_NAME,
+	  {directAccess: true}
+	  ),
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
